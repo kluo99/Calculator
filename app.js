@@ -27,16 +27,20 @@ function operate(operator, num1, num2) {
     }
 };
 
-const numbers = document.querySelectorAll('number');
-const display = document.getElementById('display');
-
-
-function changeDisplay() {
-    display.innerHTML = numbers.innerHTML;
-};
-
-for (let i = 0; i < numbers.length; i++) {
-    numbers[i].addEventListener('click',changeDisplay)
+function buttonOutput() {
+    let display = document.querySelector('#display');
+    display.textContent += this.textContent.trim();
 }
+
+const numbers = document.querySelectorAll(".number");
+numberArray = Array.from(numbers);
+numberArray.forEach(
+    button => button.addEventListener('click',buttonOutput)
+);
+// function changeDisplay() {
+//     display.innerHTML = numbers.innerHTML;
+// };
+
+
 
 

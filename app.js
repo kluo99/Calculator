@@ -27,19 +27,67 @@ function operate(operator, num1, num2) {
     }
 };
 
-function buttonOutput() {
-    let display = document.querySelector('#display');
-    display.textContent += this.textContent.trim();
+
+
+// let firstDisplay = document.querySelector('#first-number');
+let firstDisplay = document.querySelector('#first-number');
+let secondDisplay = document.querySelector('#second-number');
+let operator = document.querySelector('#operator');
+
+//function that changes the display when a button is clicked
+function firstOutput() {
+            firstDisplay.textContent += this.textContent.trim();
+            operatorArray.forEach(
+                operator => operator.addEventListener('click',end)
+            );
 }
 
-const numbers = document.querySelectorAll(".number");
+//function that displays the second number
+function secondOutput() {
+    secondDisplay.textContent += this.textContent.trim();
+}
+
+function end() {
+    firstDisplay += '';
+}
+
+
+const numbers = document.querySelectorAll('button.number');
+//converts nodelist into an array
 numberArray = Array.from(numbers);
 numberArray.forEach(
-    button => button.addEventListener('click',buttonOutput)
+       //button => button.addEventListener('click',firstOutput)
+       button => button.addEventListener('click',firstOutput)
 );
-// function changeDisplay() {
-//     display.innerHTML = numbers.innerHTML;
-// };
+
+//makes the operator buttons functional
+let operators = document.querySelectorAll('button.operator');
+operatorArray = Array.from(operators);
+operatorArray.forEach(
+    operator => operator.addEventListener('click',storeEandO)
+);
+
+//storing each number in an object
+function storeEandO() {
+    storage["operator"] = this.textContent;
+    storage["firstNumber"] = firstDisplay.textContent;
+    operator.textContent = storage["operator"]; 
+    numberArray.forEach(
+        button => button.addEventListener('click',secondOutput)
+);
+}
+
+let storage = {
+}
+// let storage = {
+//     answer: answer display.textContent
+//     firstNumber: display.textContent after operator clicked and resets display
+//     secondNumber: display.textContent after clicking equal
+//     operator: operator.innerHTML clicked
+// }
+
+
+
 
 
 

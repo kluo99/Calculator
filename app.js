@@ -1,5 +1,6 @@
+//operator functions
 function add(a, b) {
-    return a + b;
+    return parseFloat(a) + parseFloat(b);
 };
 
 function subtract(a, b) {
@@ -16,43 +17,44 @@ function divide(a, b) {
 
 //takes in an operator and two numbers
 function operate(operator, num1, num2) {
-    if (operator === add) {
+    if (operator === '+') {
         return add(num1, num2);
-    } else if (operator === subtract) {
+    } else if (operator === '-') {
         return subtract(num1,num2);
-    } else if (operator === multiply) {
+    } else if (operator === '*') {
         return multiply(num1,num2);
-    } else if (operator === divide) {
+    } else if (operator === '/') {
         return divide(num1,num2);
     }
 };
 
-
-
-// let firstDisplay = document.querySelector('#first-number');
+let displayContainer = document.querySelector('#display-container');
 let firstDisplay = document.querySelector('#first-number');
-let secondDisplay = document.querySelector('#second-number');
-let operator = document.querySelector('#operator');
+let equals = document.querySelector('#equals');
+let answer = document.querySelector('#answer');
+const numbers = document.querySelectorAll('button.number');
 
 //function that changes the display when a button is clicked
 function firstOutput() {
+            // operatorArray.forEach(
+            //     operator => operator.addEventListener('click',end)
+            // );
             firstDisplay.textContent += this.textContent.trim();
-            operatorArray.forEach(
-                operator => operator.addEventListener('click',end)
-            );
-}
+            // operatorArray.forEach(
+            //        operator => operator.addEventListener('click',end)
+            // )
+        return;}
 
 //function that displays the second number
 function secondOutput() {
-    secondDisplay.textContent += this.textContent.trim();
+    firstDisplay.textContent = "";
+    firstDisplay.textContent += this.textContent.trim();
 }
 
-function end() {
-    firstDisplay += '';
-}
+// function end() {
+//     firstDisplay.textContent = "";
+// }
 
-
-const numbers = document.querySelectorAll('button.number');
 //converts nodelist into an array
 numberArray = Array.from(numbers);
 numberArray.forEach(
@@ -71,20 +73,30 @@ operatorArray.forEach(
 function storeEandO() {
     storage["operator"] = this.textContent;
     storage["firstNumber"] = firstDisplay.textContent;
-    operator.textContent = storage["operator"]; 
     numberArray.forEach(
         button => button.addEventListener('click',secondOutput)
 );
 }
 
+equals.addEventListener('click',doMath)
+
+function doMath() {
+    storage["secondNumber"] = firstDisplay.textContent;
+    solution = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
+    storage["firstNumber"] = solution;
+    evaluate();
+}
+
+function evaluate() {
+    storage["operator"] = '';
+    storage["secondNumber"] = '';
+    firstDisplay.textContent = solution;
+    
+}
+
 let storage = {
 }
-// let storage = {
-//     answer: answer display.textContent
-//     firstNumber: display.textContent after operator clicked and resets display
-//     secondNumber: display.textContent after clicking equal
-//     operator: operator.innerHTML clicked
-// }
+
 
 
 

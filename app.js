@@ -66,36 +66,42 @@ numberArray.forEach(
 let operators = document.querySelectorAll('button.operator');
 operatorArray = Array.from(operators);
 operatorArray.forEach(
-    operator => operator.addEventListener('click',storeEandO)
+    operator => operator.addEventListener('click', storeEandO)   
 );
 
 //storing each number in an object
 function storeEandO() {
+    if(Number.isInteger(storage["firstNumber"])){
+        doMath();
+        storage["operator"] = this.textContent
+
+} else{
     storage["operator"] = this.textContent;
-    storage["firstNumber"] = firstDisplay.textContent;
+    storage["firstNumber"] = parseInt(firstDisplay.textContent);
     numberArray.forEach(
         button => button.addEventListener('click',secondOutput)
 );
+}
 }
 
 equals.addEventListener('click',doMath)
 
 function doMath() {
-    storage["secondNumber"] = firstDisplay.textContent;
+    storage["secondNumber"] = parseInt(firstDisplay.textContent);
     solution = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
     storage["firstNumber"] = solution;
     evaluate();
 }
 
 function evaluate() {
-    storage["operator"] = '';
-    storage["secondNumber"] = '';
     firstDisplay.textContent = solution;
-    
 }
 
 let storage = {
-}
+    firstNumber : "",
+    secondNumber : "",
+    operator : ""
+};
 
 
 

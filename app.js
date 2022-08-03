@@ -32,17 +32,20 @@ let displayContainer = document.querySelector('#display-container');
 let firstDisplay = document.querySelector('#first-number');
 let equals = document.querySelector('#equals');
 let answer = document.querySelector('#answer');
+let clear = document.querySelector('#clear');
 const numbers = document.querySelectorAll('button.number');
+
+firstDisplay.textContent = 0;
 
 //function that changes the display when a button is clicked
 function firstOutput() {
-            // operatorArray.forEach(
-            //     operator => operator.addEventListener('click',end)
-            // );
-            firstDisplay.textContent += this.textContent.trim();
-            // operatorArray.forEach(
-            //        operator => operator.addEventListener('click',end)
-            // )
+            if (firstDisplay.textContent == 0) {
+                firstDisplay.textContent = "";
+                firstDisplay.textContent += this.textContent.trim();
+            }
+            else {
+                firstDisplay.textContent += this.textContent.trim();
+            }
         return;}
 
 //function that displays the second number
@@ -51,14 +54,10 @@ function secondOutput() {
     firstDisplay.textContent += this.textContent.trim();
 }
 
-// function end() {
-//     firstDisplay.textContent = "";
-// }
 
 //converts nodelist into an array
 numberArray = Array.from(numbers);
 numberArray.forEach(
-       //button => button.addEventListener('click',firstOutput)
        button => button.addEventListener('click',firstOutput)
 );
 
@@ -85,10 +84,12 @@ function storeEandO() {
 }
 }
 
+//equal button solves math problem involving multiple numbers
 equals.addEventListener('click',doMath)
 
 function doMath() {
     storage["secondNumber"] = parseInt(firstDisplay.textContent);
+    //if user divides by 0, display an error message
     if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
         firstDisplay.textContent = "ERROR";
     } else {
@@ -99,10 +100,21 @@ function doMath() {
     
 }
 
+//clear button clears the display and resets the storage
+clear.addEventListener('click',clearDisplay)
+
+function clearDisplay() {
+    firstDisplay.textContent = "0";
+    storage["operator"] = "";
+    storage["firstNumber"] = "";
+    storage["secondNumber"] = "";
+}
+
 function evaluate() {
     firstDisplay.textContent = solution;
 }
 
+//stores numbers and operator
 let storage = {
     firstNumber : "",
     secondNumber : "",

@@ -89,9 +89,14 @@ equals.addEventListener('click',doMath)
 
 function doMath() {
     storage["secondNumber"] = parseInt(firstDisplay.textContent);
-    solution = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
-    storage["firstNumber"] = solution;
-    evaluate();
+    if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
+        firstDisplay.textContent = "ERROR";
+    } else {
+        solution = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
+        storage["firstNumber"] = solution;
+        evaluate();
+    }
+    
 }
 
 function evaluate() {

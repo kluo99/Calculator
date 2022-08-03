@@ -69,6 +69,7 @@ operatorArray.forEach(
     operator => operator.addEventListener('click', storeEandO)   
 );
 
+//comment
 //storing each number in an object
 function storeEandO() {
     if(Number.isInteger(storage["firstNumber"])){

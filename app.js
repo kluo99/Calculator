@@ -75,7 +75,7 @@ function storeEandO() {
         doMath();
         storage["operator"] = this.textContent
 
-} else{
+    } else{
     storage["operator"] = this.textContent;
     storage["firstNumber"] = parseInt(firstDisplay.textContent);
     numberArray.forEach(
@@ -88,17 +88,21 @@ function storeEandO() {
 equals.addEventListener('click',doMath)
 
 function doMath() {
-    storage["secondNumber"] = parseInt(firstDisplay.textContent);
     //if user divides by 0, display an error message
+    storage["secondNumber"] = parseInt(firstDisplay.textContent);
     if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
         firstDisplay.textContent = "ERROR";
-    } else {
-        solution = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
-        storage["firstNumber"] = solution;
+    } else if(storage["operator"] == "") {
+        return;
+    }
+    else {
+        storage["answer"] = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
+        //storage["firstNumber"] = solution;
         evaluate();
     }
     
 }
+
 
 //clear button clears the display and resets the storage
 clear.addEventListener('click',clearDisplay)
@@ -111,14 +115,18 @@ function clearDisplay() {
 }
 
 function evaluate() {
-    firstDisplay.textContent = solution;
+    firstDisplay.textContent = storage["answer"];
+    storage["operator"] = "";
+    storage["firstNumber"] = storage["answer"];
+    storage["secondNumber"] = "";
 }
 
 //stores numbers and operator
 let storage = {
     firstNumber : "",
     secondNumber : "",
-    operator : ""
+    operator : "",
+    answer : ""
 };
 
 

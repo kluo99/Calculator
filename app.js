@@ -2,15 +2,12 @@
 function add(a, b) {
     return parseFloat(a) + parseFloat(b);
 };
-
 function subtract(a, b) {
     return a - b;
 };
-
 function multiply(a, b) {
     return a * b;
 };
-
 function divide(a, b) {
     return a / b;
 }; 
@@ -33,8 +30,9 @@ let firstDisplay = document.querySelector('#first-number');
 let equals = document.querySelector('#equals');
 let answer = document.querySelector('#answer');
 let clear = document.querySelector('#clear');
+let decimal = document.querySelector('#decimal');
 const numbers = document.querySelectorAll('button.number');
-
+ 
 firstDisplay.textContent = 0;
 
 //function that changes the display when a button is clicked
@@ -42,16 +40,20 @@ function firstOutput() {
             if (firstDisplay.textContent == 0) {
                 firstDisplay.textContent = "";
                 firstDisplay.textContent += this.textContent.trim();
-            }
+            }  
             else {
                 firstDisplay.textContent += this.textContent.trim();
             }
-        return;}
+        return;
+    }
 
 //function that displays the second number
 function secondOutput() {
-    firstDisplay.textContent = "";
-    firstDisplay.textContent += this.textContent.trim();
+        if (storage["secondNumber"] == "") {
+            firstDisplay.textContent = "";
+            firstDisplay.textContent += this.textContent.trim();
+            storage["secondNumber"] += this.textContent.trim();
+        }
 }
 
 
@@ -68,16 +70,28 @@ operatorArray.forEach(
     operator => operator.addEventListener('click', storeEandO)   
 );
 
-//comment
+function isFloat(value) {
+    if (
+      typeof value === 'number' &&
+      !Number.isNaN(value) &&
+      !Number.isInteger(value)
+    ) {
+      return true;
+    }
+  
+    return false;
+  }
+
+// || isFloat(storage["firstNumber"]) === true
 //storing each number in an object
 function storeEandO() {
-    if(Number.isInteger(storage["firstNumber"])){
+    if(Number.isInteger(storage["firstNumber"]) || isFloat(storage["firstNumber"]) === true){
         doMath();
         storage["operator"] = this.textContent
 
     } else{
     storage["operator"] = this.textContent;
-    storage["firstNumber"] = parseInt(firstDisplay.textContent);
+    storage["firstNumber"] = parseFloat(firstDisplay.textContent);
     numberArray.forEach(
         button => button.addEventListener('click',secondOutput)
 );
@@ -89,7 +103,7 @@ equals.addEventListener('click',doMath)
 
 function doMath() {
     //if user divides by 0, display an error message
-    storage["secondNumber"] = parseInt(firstDisplay.textContent);
+    storage["secondNumber"] = parseFloat(firstDisplay.textContent);
     if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
         firstDisplay.textContent = "ERROR";
     } else if(storage["operator"] == "") {
@@ -97,7 +111,6 @@ function doMath() {
     }
     else {
         storage["answer"] = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
-        //storage["firstNumber"] = solution;
         evaluate();
     }
     
@@ -120,6 +133,18 @@ function evaluate() {
     storage["firstNumber"] = storage["answer"];
     storage["secondNumber"] = "";
 }
+
+//decimal appears when clicked 
+decimal.addEventListener('click',displayDecimal)
+
+function displayDecimal() {
+        if (firstDisplay.textContent.toString().includes(".")){
+            return;
+        } else {
+        firstDisplay.textContent += this.textContent.trim();
+        }
+}
+
 
 //stores numbers and operator
 let storage = {

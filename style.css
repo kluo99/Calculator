@@ -1,0 +1,42 @@
+#button-container {
+    display: flex;
+    position: relative;
+    top: 200px;
+    /* left: auto;
+    right: auto; */
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    background-color: bisque;
+}
+
+#answer-container {
+    /* display: flex; */
+    position: relative;
+    /* top: 20px; */
+    
+    font: size 10%;;
+    /* z-index: 1000; */
+}
+
+.number {
+    /* z-index: 500; */
+    padding: 20px;
+}
+
+.operator {
+    padding: 20px;
+}
+
+#decimal {
+    padding: 20px;
+}
+
+#equals {
+    padding: 20px;
+}
+
+#clear {
+    padding: 20px;
+}
+

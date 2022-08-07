@@ -68,15 +68,25 @@ function isFloat(value) {
 //storing each number and operator in an object
 function storeEandO() {
     if(Number.isInteger(storage["firstNumber"]) || isFloat(storage["firstNumber"]) === true) {
-        doMath();
+    //if ((Number.isInteger(storage["firstNumber"]) || isFloat(storage["firstNumber"])) && isFloat(parseFloat(storage["secondNumber"]))) {
+        doMath2();
         storage["operator"] = this.textContent;
+    } else if ((Number.isInteger(storage["secondNumber"]) || isFloat(storage["secondNumber"]) === true)) {
+        storage["secondNumber"] = "";    
+        storage["operator"] = this.textContent;
+        storage["firstNumber"] = parseFloat(firstDisplay.textContent);
+        decimal.addEventListener('click',displayDecimal2)
+        numberArray.forEach(
+        button => button.addEventListener('click',secondOutput)
+    );
 
-    } else{
-    storage["secondNumber"] = "";    
-    storage["operator"] = this.textContent;
-    storage["firstNumber"] = parseFloat(firstDisplay.textContent);
-    decimal.addEventListener('click',displayDecimal2)
-    numberArray.forEach(
+    }
+    else{
+        storage["secondNumber"] = "";    
+        storage["operator"] = this.textContent;
+        storage["firstNumber"] = parseFloat(firstDisplay.textContent);
+        decimal.addEventListener('click',displayDecimal2)
+        numberArray.forEach(
         button => button.addEventListener('click',secondOutput)
 );
 }
@@ -93,7 +103,6 @@ function secondOutput() {
     } 
 }
 
-
 function doMath() {
     //if user divides by 0, display an error message
     if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
@@ -108,6 +117,21 @@ function doMath() {
         }
 }
 
+function doMath2() {
+    //if user divides by 0, display an error message
+    if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
+        firstDisplay.textContent = "ERROR";
+    } else if(storage["operator"] == "") {
+        return;
+    }
+    else {
+        storage["secondNumber"] = parseFloat(firstDisplay.textContent);
+        storage["answer"] = operate(storage["operator"],storage["firstNumber"],storage["secondNumber"]);
+        evaluate();
+        storage["firstNumber"] = storage["answer"]; 
+        }
+}
+
 function clearDisplay() {
     firstDisplay.textContent = 0;
     storage["operator"] = "";
@@ -119,7 +143,8 @@ function clearDisplay() {
 function evaluate() {
     firstDisplay.textContent = storage["answer"];
     storage["operator"] = "";
-    storage["firstNumber"] = storage["answer"];
+    //storage["firstNumber"] = storage["answer"];
+    storage["firstNumber"] = "";
     storage["secondNumber"] = "";
 }
 

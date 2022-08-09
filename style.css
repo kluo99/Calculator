@@ -1,42 +1,95 @@
 #button-container {
-    display: flex;
     position: relative;
-    top: 200px;
     /* left: auto;
     right: auto; */
     align-items: center;
     justify-content: center;
-    height: 500px;
-    background-color: bisque;
+    height: 550px;
+    width: 400px;
+    left: 700px;
+    top: 125px;
+    border-radius: 30px;
+    background-color:lightblue;
 }
 
-#answer-container {
-    /* display: flex; */
+#first-number {
     position: relative;
-    /* top: 20px; */
-    
-    font: size 10%;;
-    /* z-index: 1000; */
+    padding: 5px;
+    height: 100px;
+    font-size: 60px;
+    background-color:#b2b9b7;
+    text-align: right;
+    border-radius: 20px 20px 0px 0px;
 }
 
 .number {
     /* z-index: 500; */
+    position: relative;
+    left: 22px;
+    top: -40px;
     padding: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-color:white;
+    margin-left: 5px;
 }
 
 .operator {
+    position: relative;
+    top: -40px;
+    left: 22px;
     padding: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-color:white;
+    margin-left: 5px;
+    background-color: #ebab34;
 }
 
 #decimal {
+    position: relative;
+    top: -40px;
+    left: 26px;
     padding: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-color:white;
+    margin-left: 1px;
 }
+    
 
 #equals {
+    position: relative;
+    top: -40px;
+    left: 28px;
     padding: 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 25px;
+    border-color:white;
+    margin-left: 3px;
+    background-color:deepskyblue;
 }
 
 #clear {
-    padding: 20px;
+    position: relative;
+    top: -50px;
+    left: 220px;
+    width: 160px;
+    height: 80px;
+    font-size: 25px;
+    border-radius: 50%;
+    border-color:white;
+    background-color: #eb4c34;
 }
 
+.plus {
+    margin-left: 11px;
+}

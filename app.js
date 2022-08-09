@@ -44,7 +44,9 @@ function firstOutput() {
             if (firstDisplay.textContent == "0") {
                 firstDisplay.textContent = "";
                 firstDisplay.textContent += this.textContent.trim();
-            }  
+            }  else if (firstDisplay.textContent.toString().length >= 10) {
+                return;
+            }
             else {
                 firstDisplay.textContent += this.textContent.trim();
             }
@@ -117,6 +119,7 @@ function doMath() {
         }
 }
 
+//stringing together multiple operators and numbers
 function doMath2() {
     //if user divides by 0, display an error message
     if ((storage["secondNumber"]) == 0 && (storage["operator"] == "/")) {
@@ -141,18 +144,23 @@ function clearDisplay() {
 }
 
 function evaluate() {
+    if (storage["answer"].toString().length > 10) {
+        firstDisplay.textContent = parseFloat(storage["answer"].toString().substring(0 ,9)) + "+";
+    } else {
     firstDisplay.textContent = storage["answer"];
     storage["operator"] = "";
     //storage["firstNumber"] = storage["answer"];
     storage["firstNumber"] = "";
     storage["secondNumber"] = "";
-}
+}}
 
 function displayDecimal() {
         if (firstDisplay.textContent == "0") {
             firstDisplay.textContent += ".";
             storage["firstNumber"] += "0."
         } else if (firstDisplay.textContent.toString().includes(".")){
+            return;
+        } else if(firstDisplay.textContent.toString().length >= 10) {
             return;
         }
         else {
